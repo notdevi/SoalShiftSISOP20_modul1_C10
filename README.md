@@ -243,13 +243,46 @@ Untuk proses comparing nantinya, isi dari `wget.log` di-*append* ke file bernama
 cat wget.log >> wgetpanjang.log
 grep "Location" wgetpanjang.log >> location.log
 ```
-Setelah proses looping download gambar selesai, file `wget.log` dan `wgetpanjang.log` dikosongkan untuk loop-loop berikutnya jika program dijalankan lagi.
-```bash
- > wget.log
- > wgetpanjang.log
-```
 (b) Crontab untuk penjadwalan tersebut adalah :
 ```crontab
 5 6-23/8 * * 0-5 ls -lt /home/devi/bash soal3.sh
 ```
-(c) 
+(c) Isi dari `location.log` dimasukkan ke dalam bentuk array `readarray -t arr < location.log`
+Dilakukan looping sebanyak jumlah gambar yang di download. Tujuan dari loop adalah untuk menyortir gambar satu per satu untuk ditentukan apakah memiliki duplikat atau tidak.
+Di dalam loop di declare nokenangan `nokenangan=$(ls -1 kenangan | wc -l)` dan noduplicate `noduplicate=$(ls -1 duplicate | wc -l)`.
+kondisi pertama, gambar yang di download langsung masuk ke folder kenangan, karena tidak mungkin ada duplikat.
+```bash
+if [ $a -eq 0 ]
+	then mv pdkt_kusuma_1.jpg kenangan/kenangan_1.jpg
+```
+kondisi kedua, gambar akan di cek dari lokasinya, apa bila terdapat kesamaan maka variable counter `cntr` di set = 1.
+```bash
+		elif [ "${arr[$a]}" == "${arr[$i]}" ]
+			then
+			cntr=$((1))
+			break
+		fi
+```
+Jika `cntr=0` maka foto masuk ke folder kenangan, sebaliknya akan masuk ke folder duplikat
+```bash
+if [ $cntr -eq 0 ]
+	then
+		mv pdkt_kusuma_"$(($a+1))".jpg kenangan/kenangan_"$(($nokenangan+1))".jpg
+		echo testcase1
+	else
+		echo testcase2
+		mv pdkt_kusuma_"$(($a+1))".jpg duplicate/duplicate_"$(($noduplicate+1))".jpg
+	fi
+```
+Jika terdapat file dengan ekstensi `.log` akan dirubah dengan ekstensi `.log.bak` sebagai back up dari file `.log` sebelumnya.
+```bash
+for nm in *.log; 
+do 
+	mv "$nm" "${nm%.log}.log.bak"
+done
+```
+Setelah proses looping download gambar selesai, file `wget.log` dan `wgetpanjang.log` dikosongkan untuk loop-loop berikutnya jika program dijalankan lagi.
+```bash
+ > wget.log
+ > wgetpanjang.log
+ ```
