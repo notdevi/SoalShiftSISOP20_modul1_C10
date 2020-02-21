@@ -2,7 +2,7 @@
 
 ### Nama Anggota Kelompok :
 ### 1. Devi Hainun Pasya (05111840000014)
-### 2. Anggara Yuda Pratama (0511184000008)
+### 2. Anggara Yuda Pratama (05111840000008)
 
 ### Soal No. 1
 Terdapat data pada file "Sample-Superstore.tsv". Dari dara tersebut, tentukan :
