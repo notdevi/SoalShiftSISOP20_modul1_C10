@@ -1,5 +1,9 @@
 # SoalShiftSISOP20_modul1_C10
 
+# Nama Anggota Kelompok :
+# Devi Hainun Pasya (05111840000014)
+# Anggara Yuda Pratama (0511184000008)
+
 ### Soal No. 1
 Terdapat data pada file "Sample-Superstore.tsv". Dari dara tersebut, tentukan :
 
