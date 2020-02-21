@@ -7,6 +7,7 @@ region=$(awk -F \\t 'FNR>1
 	 END { for(b in arr) { printf b"\n" } }' Sample-Superstore.tsv | sort -g | head -1)
 
 echo $region
+echo " "
 
 echo "2 state dengan profit paling sedikit :"
 
@@ -19,6 +20,7 @@ state2=$(echo -e "$state" | sed -n '2p')
 
 echo $state1
 echo $state2
+echo " "
 
 echo "10 produk dengan profit paling kecil :"
 product=$(awk -v state1="$state1" -v state2="$state2" -F \\t 'FNR>1
