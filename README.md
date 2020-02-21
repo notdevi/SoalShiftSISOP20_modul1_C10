@@ -250,6 +250,6 @@ Setelah proses looping download gambar selesai, file `wget.log` dan `wgetpanjang
 ```
 (b) Crontab untuk penjadwalan tersebut adalah :
 ```crontab
-5 6-23/8 * * 0-5 ls -lt /home/devi/ && bash soal3.sh
+5 6-23/8 * * 0-5 ls -lt /home/devi/bash soal3.sh
 ```
 (c) 
