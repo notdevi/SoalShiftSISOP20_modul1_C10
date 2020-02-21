@@ -234,7 +234,7 @@ Kemudian gambar didownload dengan command `wget`
 ```bash
 wget $URL -O $FILE -o $LOGFILE
 ```
-Untuk proses comparing nantinya, isi dari `wget.log` di-copykan ke file bernama `wgetpanjang.log`, lalu diambil locationnya dan di-copy ke file bernama `location.log`.
+Untuk proses comparing nantinya, isi dari `wget.log` di-*append* ke file bernama `wgetpanjang.log`, lalu diambil locationnya dan di-*append* ke file bernama `location.log`.
 ```bash
 cat wget.log >> wgetpanjang.log
 grep "Location" wgetpanjang.log >> location.log
