@@ -192,3 +192,60 @@ decrypt=`printf "$file" | tr [${lower:$jam:26}${upper:$jam:26}] [${lower:26}${up
 ```
 
 ### Soal No.3
+(a) Buat script untuk mendownload 28 gambar dari “https://loremflickr.com/320/240/cat” menggunakan command `wget` dan menyimpan file dengan nama `“pdkt_kusuma_NO”` dan simpan log messages wget kedalam sebuah file `“wget.log”`.
+
+(b) Setiap 8 jam dimulai dari jam 6.05 setiap hari kecuali hari sabtu.
+
+(c) Buat script untuk mengidentifikasi gambar yang identik dari keseluruhan gambar yang terdownload tadi. Bila identik pindahkan salah satu gambar ke dalam folder `./duplicate` dengan format filename `duplicate_nomor`, dan sisanya di folder `./kenangan` dengan format filename `kenangan_nomor`. Lakukan back up seluruh  log menjadi ekstensi `.log.bak`.
+
+***soal3.sh***
+```
+#!/bin/bash
+
+mkdir kenangan
+mkdir duplicate
+
+for i in {1..28};
+do
+#DIR=/home/devi
+
+FILE=pdkt_kusuma_$i.jpg
+LOGFILE=wget.log
+URL=https://loremflickr.com/320/240/cat
+
+#cd $DIR
+wget $URL -O $FILE -o $LOGFILE
+
+cat wget.log >> wgetpanjang.log
+grep "Location" wgetpanjang.log >> location.log
+
+done
+ > wget.log
+ > wgetpanjang.log
+ ```
+ (a) Untuk mendownload 28 gambar, digunakan loop `for i in {1..28};`.
+Lalu masing masing komponen dari proses download gambar didefinisikan dalam variabel-variabel. Format penamaan gambar diberi variable `FILE`, file untuk menyimpan log messages wget diberi variable `FILELOG`, dan URL diberi variable `URL`.
+```
+FILE=pdkt_kusuma_$i.jpg
+LOGFILE=wget.log
+URL=https://loremflickr.com/320/240/cat
+```
+Kemudian gambar didownload dengan command `wget`
+```
+wget $URL -O $FILE -o $LOGFILE
+```
+Untuk proses comparing nantinya, isi dari `wget.log` di-copykan ke file bernama `wgetpanjang.log`, lalu diambil locationnya dan di-copy ke file bernama `location.log`.
+```
+cat wget.log >> wgetpanjang.log
+grep "Location" wgetpanjang.log >> location.log
+```
+Setelah proses looping download gambar selesai, file `wget.log` dan `wgetpanjang.log` dikosongkan untuk loop-loop berikutnya jika program dijalankan lagi.
+```
+ > wget.log
+ > wgetpanjang.log
+```
+(b) Crontab untuk penjadwalan tersebut adalah :
+```
+5 6-23/8 * * 0-5 ls -lt /home/devi/ && bash soal3.sh
+```
+(c) 
