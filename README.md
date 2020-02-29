@@ -255,7 +255,8 @@ grep "Location" wgetpanjang.log >> location.log
 
 done
  ```
- (a) `if [[ `ls $PWD | grep "kenangan"` != "kenangan" ]]
+ (a) Untuk membuat folder kenangan maupun duplicate dengan :
+```if [[ `ls $PWD | grep "kenangan"` != "kenangan" ]]
 then
   mkdir $PWD/kenangan
 fi
@@ -263,7 +264,7 @@ fi
 if [[ `ls $PWD | grep "duplicate"` != "duplicate" ]]
 then
   mkdir $PWD/duplicate
-fi`
+fi```
 Maksud diatas yaitu untuk mendeteksi apakah folder kenangan maupun duplicate sudah dibuat atau belum pada PWD (Print Working Directory) yang sudah ditentukan. Selanjutnya untuk mendownload 28 gambar, digunakan loop `for i in {1..28};`.
 Lalu masing masing komponen dari proses download gambar didefinisikan dalam variabel-variabel. Format penamaan gambar diberi variable `FILE`, file untuk menyimpan log messages wget diberi variable `FILELOG`, dan URL diberi variable `URL`.
 
