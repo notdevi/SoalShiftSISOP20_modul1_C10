@@ -51,6 +51,7 @@ END { for(b in arr) { print b } }' Sample-Superstore.tsv | sort -g | head -1
 ```
 Hasil dari awk tersebut disimpan dalam variable bernama region, untuk menampilkan output digunakan command `echo $region`. 
 Untuk kepentingan soal no. 1b, hasil yang disimpan dalam variable region disalin ke file text bernama `output_a` dengan menggunakan command `echo $region > output_a`
+
 (b) Seperti pada poin a, untuk mengakses kolom yang diperlukan digunakan argumen yang bersesuaian dengan urutan ke berapakah kolom yang ingin diakses. Karena field negara bagian (state) berada pada kolom ke-11, maka diakses sebagai argumen `$11`, kolom profit diakses sebagai argumen `$21`, dan kolom region diakses sebagai argumen `$13`.
 Untuk mengakses output dari poin a, perlu mendeklarasi sebuah variable baru yaitu `$region` yang berisi output point a dengan mengambil isi dari file `output_a`.
 ```awk
