@@ -229,8 +229,16 @@ decrypt=`printf "$file" | tr [${lower:$jam:26}${upper:$jam:26}] [${lower:26}${up
 ```bash
 #!/bin/bash
 
-mkdir kenangan
-mkdir duplicate
+if [[ `ls $PWD | grep "kenangan"` != "kenangan" ]]
+then
+  mkdir $PWD/kenangan
+fi
+
+if [[ `ls $PWD | grep "duplicate"` != "duplicate" ]]
+then
+  mkdir $PWD/duplicate
+fi
+
 
 for i in {1..28};
 do
@@ -243,15 +251,22 @@ URL=https://loremflickr.com/320/240/cat
 #cd $DIR
 wget $URL -O $FILE -o $LOGFILE
 
-cat wget.log >> wgetpanjang.log
 grep "Location" wgetpanjang.log >> location.log
 
 done
- > wget.log
- > wgetpanjang.log
  ```
- (a) Untuk mendownload 28 gambar, digunakan loop `for i in {1..28};`.
+ (a) `if [[ `ls $PWD | grep "kenangan"` != "kenangan" ]]
+then
+  mkdir $PWD/kenangan
+fi
+
+if [[ `ls $PWD | grep "duplicate"` != "duplicate" ]]
+then
+  mkdir $PWD/duplicate
+fi`
+Maksud diatas yaitu untuk mendeteksi apakah folder kenangan maupun duplicate sudah dibuat atau belum pada PWD (Print Working Directory) yang sudah ditentukan. Selanjutnya untuk mendownload 28 gambar, digunakan loop `for i in {1..28};`.
 Lalu masing masing komponen dari proses download gambar didefinisikan dalam variabel-variabel. Format penamaan gambar diberi variable `FILE`, file untuk menyimpan log messages wget diberi variable `FILELOG`, dan URL diberi variable `URL`.
+
 ```bash
 FILE=pdkt_kusuma_$i.jpg
 LOGFILE=wget.log
@@ -291,9 +306,7 @@ Jika `cntr=0` maka foto masuk ke folder kenangan, sebaliknya akan masuk ke folde
 if [ $cntr -eq 0 ]
 	then
 		mv pdkt_kusuma_"$(($a+1))".jpg kenangan/kenangan_"$(($nokenangan+1))".jpg
-		echo testcase1
 	else
-		echo testcase2
 		mv pdkt_kusuma_"$(($a+1))".jpg duplicate/duplicate_"$(($noduplicate+1))".jpg
 	fi
 ```
@@ -304,8 +317,7 @@ do
 	mv "$nm" "${nm%.log}.log.bak"
 done
 ```
-Setelah proses looping download gambar selesai, file `wget.log` dan `wgetpanjang.log` dikosongkan untuk loop-loop berikutnya jika program dijalankan lagi.
+Setelah proses looping download gambar selesai, file `wget.log` dikosongkan untuk loop-loop berikutnya jika program dijalankan lagi.
 ```bash
  > wget.log
- > wgetpanjang.log
  ```
