@@ -1,8 +1,14 @@
 #!/bin/bash
 
-mkdir kenangan
-mkdir duplicate
+if [[ `ls $PWD | grep "kenangan"` != "kenangan" ]]
+then
+  mkdir $PWD/kenangan
+fi
 
+if [[ `ls $PWD | grep "duplicate"` != "duplicate" ]]
+then
+  mkdir $PWD/duplicate
+fi
 for i in {1..28};
 do
 	#DIR=/home/whitezhadow
@@ -13,10 +19,8 @@ do
 
 	#cd $DIR
 	wget $URL -O $FILE -o $LOGFILE
-
-	cat wget.log >> wgetpanjang.log
 done
-grep "Location" wgetpanjang.log >> location.log
+grep "Location" wget.log >> location.log
 
 
 readarray -t arr < location.log
@@ -27,11 +31,8 @@ do
 	nokenangan=$(ls -1 kenangan | wc -l)
 	noduplicate=$(ls -1 duplicate | wc -l)
 	cntr=$((0))
-	echo ${arr[a]}, $nokenangan, $noduplicate
-	echo pdkt_kusuma_"$((i+1))".jpg
 	for((i=0; i<$a; i=i+1))
 		do
-		echo perbandingan["$(($a+1))"]dengan["$(($i+1))"]
 		if [ $a -eq 0 ]
 			then mv pdkt_kusuma_1.jpg kenangan/kenangan_1.jpg
 
@@ -45,9 +46,7 @@ do
 	if [ $cntr -eq 0 ]
 	then
 		mv pdkt_kusuma_"$(($a+1))".jpg kenangan/kenangan_"$(($nokenangan+1))".jpg
-		echo testcase1
 	else
-		echo testcase2
 		mv pdkt_kusuma_"$(($a+1))".jpg duplicate/duplicate_"$(($noduplicate+1))".jpg
 	fi
 
@@ -59,4 +58,3 @@ do
 done 
 
  > wget.log
- > wgetpanjang.log
