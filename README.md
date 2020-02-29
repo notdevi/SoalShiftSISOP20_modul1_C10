@@ -135,7 +135,7 @@ pass="$pass""$(cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 25)"
 Password random akan di-generate oleh file `urandom`, dengan constraint password terdiri atas huruf kecil `a-z`, huruf besar `A-Z` dan angka `0-9` sebanyak 28 karakter, dan dibuat 1 buah setiap kali perintah dijalankan. String password tersebut disimpan dalam variable `$pass`.
 
 **HASIL :**
-![](screenshoot/2.png)
+![](screenshoot/3.png)
 
 (b) Kemudian isi dari variable tersebut dimasukkan ke dalam file berekstensi `.txt` dengan nama yang diinputkan sebagai `$1`.
 ```bash
@@ -216,7 +216,7 @@ decrypt=`printf "$file" | tr [${lower:$jam:26}${upper:$jam:26}] [${lower:26}${up
 ```
 
 **HASIL :**
-![](screenshoot/3.png)
+![](screenshoot/2.png)
 
 ### Soal No.3
 (a) Buat script untuk mendownload 28 gambar dari “https://loremflickr.com/320/240/cat” menggunakan command `wget` dan menyimpan file dengan nama `“pdkt_kusuma_NO”` dan simpan log messages wget kedalam sebuah file `“wget.log”`.
